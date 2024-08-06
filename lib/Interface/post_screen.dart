@@ -40,16 +40,6 @@ class _PostScreenState extends State<PostScreen> {
     });
   }
 
-  void signOut() {
-    auth.signOut().then((value) {
-      Utils().toastMessage('Signed Out Successfully!');
-      Navigator.of(context)
-          .push(CupertinoPageRoute(builder: (context) => const SignIn()));
-    }).onError((error, stackTrace) {
-      Utils().toastMessage('Error While Signing Out \n $error');
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,35 +53,28 @@ class _PostScreenState extends State<PostScreen> {
       //drawer
       endDrawer: Drawer(
         backgroundColor: Colors.grey.shade900,
-        child: ListView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SafeArea(child: SizedBox(height: 30)),
-            const Icon(
-              Icons.pets_rounded,
-              color: Colors.deepPurple,
-              size: 60,
-            ),
-            const SizedBox(height: 50),
-            //item 1
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                IconButton(
-                    onPressed: signOut,
-                    icon: const Icon(
-                      Icons.logout_outlined,
-                      color: Colors.deepPurple,
-                    )),
-                const SizedBox(width: 10),
-                Text(
-                  'Sign Out'.toUpperCase(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                  ),
+            ListTile(
+              title: const Text(
+                'Good Bye!',
+                style: TextStyle(
+                  color: Colors.white,
+                  letterSpacing: 1,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
+              ),
+              leading: const Icon(Icons.logout_sharp, color: Colors.deepPurple),
+              onTap: () {
+                auth.signOut().then((value) {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const SignIn()));
+                  Utils().toastMessage('Signed out Successfully');
+                }).onError((error, stackTrace) {
+                  Utils().toastMessage(error.toString());
+                });
+              },
             ),
           ],
         ),

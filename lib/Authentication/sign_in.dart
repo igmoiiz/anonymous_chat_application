@@ -1,3 +1,4 @@
+import 'package:chat_complete/Authentication/forgot_password.dart';
 import 'package:chat_complete/Authentication/signup.dart';
 import 'package:chat_complete/Interface/interface.dart';
 import 'package:chat_complete/Utilities/utils.dart';
@@ -165,6 +166,25 @@ class _SignInState extends State<SignIn> {
                   ],
                 ),
               ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ForgotPassword()));
+                },
+                child: const Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 24.0),
+                    child: Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
               //submit button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -172,7 +192,7 @@ class _SignInState extends State<SignIn> {
                   onTap: () {
                     if (_form.currentState!.validate()) {
                       signIn();
-                    } 
+                    }
                   },
                   child: Container(
                     height: 50,
