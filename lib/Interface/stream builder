@@ -1,0 +1,38 @@
+//stream builder method
+            Expanded(
+                child: StreamBuilder(
+              stream: ref.onValue,
+              builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+                if (!snapshot.hasData) {
+                  return const CircularProgressIndicator(
+                    color: Colors.deepPurple,
+                    strokeAlign: BorderSide.strokeAlignCenter,
+                    strokeWidth: BorderSide.strokeAlignCenter,
+                  );
+                } else {
+                  Map<dynamic, dynamic> map =
+                      snapshot.data?.snapshot.value as dynamic;
+                  List<dynamic> list = [];
+                  list.clear();
+                  list = map.values.toList();
+                  return ListView.builder(
+                      itemCount: snapshot.data?.snapshot.children.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                            list[index]['Thought'],
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          subtitle: Text(
+                            list[index]['ID'],
+                            style: TextStyle(
+                              color: Colors.grey.shade800,
+                            ),
+                          ),  
+                        );
+                      });
+                }
+              },
+            )), 
