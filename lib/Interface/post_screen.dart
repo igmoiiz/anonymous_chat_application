@@ -1,7 +1,6 @@
 import 'package:chat_complete/Authentication/sign_in.dart';
 import 'package:chat_complete/Utilities/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:google_fonts/google_fonts.dart';
